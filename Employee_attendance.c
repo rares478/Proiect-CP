@@ -130,6 +130,10 @@ void clock_out(Employee* e)
             clock_out.month = month;
             clock_out.year = year;
             clock_out.hour = hour;
+
+            int hours = hours_worked;
+            hours = clock_out.hour - clock_in.hour;
+            hours_worked = hours;
         }
         // write the data to the output file
         fprintf(fp_out, "%d,%s,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%d-%d-%d,%d-%d-%d,%d-%d-%d-%d,%d-%d-%d-%d,%d\n",

@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Employee_attendance.c" />
     <ClCompile Include="Employee_database.c" />
+    <ClCompile Include="Employee_front.c" />
     <ClCompile Include="Employee_pay.c" />
     <ClCompile Include="Employee_performance.c" />
     <ClCompile Include="Main.c" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Employee_attendance.h" />
     <ClInclude Include="Employee_database.h" />
+    <ClInclude Include="Employee_front.h" />
     <ClInclude Include="Employee_pay.h" />
     <ClInclude Include="Employee_performance.h" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "Employee_pay.h"
 #include "Employee_database.h"
 
@@ -24,8 +25,13 @@ float calculate_bonus(Employee* e) {
         return 0.0;
     }
 
+    time_t t = time(NULL);
+    struct tm* tm = localtime(&t);
+
+    int year = tm->tm_year + 1900;
+
     // calculate bonus based on salary and years of service
-    int years_of_service = 2023 - e->start_date.year;
+    int years_of_service = year - e->start_date.year;
     e->bonus = e->salary * (years_of_service * 0.05);
 
     return e->bonus;
@@ -111,7 +117,7 @@ void pay_employee(Employee* e) {
     rename("employees_temp.txt", "employees.txt");
 }
 
-void print_payroll_report() {
+void print_pay() {
     // open the input file
     FILE* fp = fopen("employees.txt", "r");
     if (fp == NULL) {
@@ -148,4 +154,22 @@ void print_payroll_report() {
 
     // close the file
     fclose(fp);
+
+    printf("\n\n\n");
+    printf("1. Go back to main menu\n");
+    printf("2. Exit\n");
+    int choice;
+    scanf("%d", &choice);
+    switch (choice)
+    {
+    case 1:
+        show_main();
+        break;
+    case 2:
+        return 0;
+        break;
+    default:
+        show_main();
+        break;
+    }
 }

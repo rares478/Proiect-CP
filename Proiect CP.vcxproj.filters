@@ -30,6 +30,9 @@
     <ClCompile Include="Employee_performance.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Employee_front.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Employee_database.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Employee_performance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Employee_front.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
