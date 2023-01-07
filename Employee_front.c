@@ -86,7 +86,23 @@ void show_main_admin()
             remove_employee(id);
             break;
         case 3:
-            modify_employee_front();
+            system("cls");
+            printf("Which employee do you wish to modify\n");
+            printf("Your option:");
+            char option[30];
+            scanf("%s", option);
+
+            Employee* e;
+            if (isdigit(option[0]))
+            {
+                int id = atoi(option);
+                e = search_employee_by_id(id);
+            }
+            else
+            {
+                e = search_employee_by_name(option);
+            }
+            modify_employee_front(e);
             break;
         case 4:
             print_pay();
@@ -98,7 +114,7 @@ void show_main_admin()
             printf("Insert name or ID:");
             char employee[30];
             scanf("%s", employee);
-            Employee* e;
+            Employee* es = {0};
 
             if (isdigit(employee[0]))
             {
@@ -110,7 +126,7 @@ void show_main_admin()
                 e = search_employee_by_name(employee);
             }
 
-            print_info_front(e);
+            print_info_front(es);
             break;
         default:
             show_main_admin();
@@ -265,7 +281,10 @@ void show_main_employee(Employee* e)
     printf("Your choice: ");
     scanf("%d", &continueda);
     if (continueda == 1)
+    {
+        fflush(stdin);
         show_main_employee(e);
+    }
     else 
         exit;
 }
@@ -345,80 +364,58 @@ void show_employees_on_vacation()
     }
 }
 
-void modify_employee_front()
+void modify_employee_front(Employee* e)
 {
     system("cls");
-    printf("Which employee do you wish to modify\n");
-    printf("Your option:");
-    char option[30];
-    scanf("%s", option);
-
-    Employee* e;
-    if (isdigit(option[0]))
-    {
-        int id = atoi(option);
-        e= search_employee_by_id(id);
-    }
-    else
-    { 
-       e=  search_employee_by_name(option);
-    }
-        
     printf("ID  Name            Position          Pay Rate   Hours Worked   Salary Paid   Taxes Paid   Bonus   \n");
-    printf("=========================================================================================\n");
-    printf("%-4d%-16s%-20s%-12.2f%-14.2f%-9.2f%-8.2f%-8.2f\n\n\n",
+    printf("===================================================================================================\n");
+    printf("%-4d%-16s%-20s%-12.2f%-17.2f%-10.2f%-11.2f%-8.2f\n\n\n",
         e->id, e->name, e->position, e->pay_rate, e->hours_worked, e->salary, e->taxes, e->bonus);
     printf("What do you wish to modify\n");
-    printf("1. Id\n");
-    printf("2. Name\n");
-    printf("3. Position\n");
-    printf("4. Pay Rate\n");
-    printf("5. Bonus\n");
-    printf("6. Return\n");
+    printf("1. Name\n");
+    printf("2. Position\n");
+    printf("3. Pay Rate\n");
+    printf("4. Bonus\n");
+    printf("5. Return\n");
     printf("Your choice:");
     int choice;
-    scanf("%d \n", &choice);
+    scanf("%d", &choice);
 
     switch (choice) {
     case 1:
-        printf("Insert new Id:");
-        int new_id;
-        scanf("%d \n", &new_id);
-        e->id = new_id;
+        printf("Insert new Name:");
+        char new_name[30];
+        scanf("%s", new_name);
+        e->name = new_name;
         modify_employee(e);
         break;
     case 2:
-        printf("Insert new Name:");
-        char new_name[30];
-        scanf("%s \n", new_name);
-        strcpy(new_name, e->name);
+        printf("Insert new Position:");
+        char new_position[30];
+        scanf("%s", new_position);
+        strcpy(e->position, new_position);
         modify_employee(e);
         break;
     case 3:
-        printf("Insert new Position:");
-        char new_position[30];
-        scanf("%s \n", new_position);
-        strcpy(new_position, e->name);
-        modify_employee(e);
-        break;
-    case 4:
         printf("Insert new Pay rate:");
         float new_pay;
-        scanf("%f \n", &new_pay);
+        scanf("%f", &new_pay);
         e->pay_rate = new_pay;
         modify_employee(e);
         break;
-    case 5:
+    case 4:
         printf("Insert new Bonus:");
         float new_bonus;
-        scanf("%f \n", &new_bonus);
+        scanf("%f", &new_bonus);
         e->bonus = new_bonus;
         modify_employee(e);
         break;
-    case 6:
-        show_main();
+    case 5:
+        show_main_admin();
         break;
     }
+    fflush(stdin);
+    modify_employee_front(e);
 
 }
 
